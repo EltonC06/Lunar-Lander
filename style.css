@@ -16,6 +16,14 @@ body {
     background-color: black;
 }
 
+#terrain {
+    position: relative;
+    top: 450px;
+    background-color: rgb(149, 150, 150);
+    width: 100%;
+    height: 50px;
+}
+
 #data {
     color: rgb(4, 107, 30);
 }
