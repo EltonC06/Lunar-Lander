@@ -1,5 +1,4 @@
 body {
-    background-color: gray;
     font-family: Arial;
 }
 
@@ -11,14 +10,26 @@ body {
     text-align: center;
 }
 
-#screen_game {
-    background-color: blue;
+#game {
+    width: 500px;
     height: 500px;
+    background-color: black;
+}
+
+#character {
+    position: relative;
+    left: 50px;
+    top: 50px;
+    border-style: groove;
+    width: 10px;
+    height: 10px;
+    background-color: antiquewhite;
 }
 
 #menu {
     padding-top: 50px;
     padding-bottom: 50px;
     text-align: center;
-
+    align-items: center;
+    align-self: center;
 }
