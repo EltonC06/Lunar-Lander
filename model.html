@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lunar Lander</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="script" href="script.js">
 </head>
 
 <body>
@@ -20,6 +19,12 @@
         </div>
     </div>
     
+    <div id="controls">
+        <button onclick="control('left')">esquerda</button>
+        <button onclick="control('up')">cima</button>
+        <button onclick="control('right')">direita</button>
+    </div>
+    
     <div id="menu">
         <input type="button" value="Jogar">
         <input type="button" value="Recordes">
@@ -30,5 +35,7 @@
     <footer id="footer-main">
         <h1>Made by EltonC06</h1>
     </footer>
+    <script src="script.js"></script>
 </body>
+
 </html>
