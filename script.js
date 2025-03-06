@@ -14,14 +14,21 @@ function control(direction) {
     let speed = 10
     switch (direction) {
         case "left":
-            character.style.left = int_position_x - speed + "px"
+            if (int_position_y != 490) { // jogador não pode se mover uma vez tocado no chão
+                character.style.left = int_position_x - speed + "px"
+            }
+            
             break
         case "right":
-            character.style.left = int_position_x + speed + "px"
+            if (int_position_y != 490) { // jogador não pode se mover uma vez tocado no chão
+                character.style.left = int_position_x + speed + "px"
+            }
             break
         case "up":
-            character.style.top = int_position_y - speed + "px"
-            y_speed -= 1
+            if (int_position_y != 490) {
+                character.style.top = int_position_y - speed + "px"
+                y_speed -= 1
+            }
             break
     }
 }
