@@ -35,6 +35,7 @@ function control(direction) {
 
 setInterval(gravity, 150)
 setInterval(aceleration, 1500)
+setInterval(updatetelemetry, 150)
 
 
 function gravity() {
@@ -73,4 +74,9 @@ function aceleration() {
         y_speed += 1
         console.log("acelerando +1")
     }
+}
+
+function updatetelemetry() {
+    let text = document.getElementById("data")
+    text.textContent = "Speed: " + y_speed
 }

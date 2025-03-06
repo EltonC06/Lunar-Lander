@@ -16,6 +16,10 @@ body {
     background-color: black;
 }
 
+#data {
+    color: rgb(4, 107, 30);
+}
+
 #character {
     position: relative;
     left: 50px;
