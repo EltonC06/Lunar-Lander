@@ -14,18 +14,18 @@ function control(direction) {
     let speed = 10
     switch (direction) {
         case "left":
-            if (int_position_y != 490) { // jogador não pode se mover uma vez tocado no chão
+            if (checkCollision() == false) { // jogador não pode se mover uma vez tocado no chão
                 character.style.left = int_position_x - speed + "px"
             }
             
             break
         case "right":
-            if (int_position_y != 490) { // jogador não pode se mover uma vez tocado no chão
+            if (checkCollision() == false) { // jogador não pode se mover uma vez tocado no chão
                 character.style.left = int_position_x + speed + "px"
             }
             break
         case "up":
-            if (int_position_y != 490) {
+            if (checkCollision() == false) {
                 character.style.top = int_position_y - speed + "px"
                 y_speed -= 1
             }
@@ -34,7 +34,7 @@ function control(direction) {
 }
 
 setInterval(gravity, 150)
-setInterval(aceleration, 1500)
+//setInterval(aceleration, 1500)
 setInterval(updatetelemetry, 150)
 
 
@@ -48,7 +48,7 @@ function gravity() {
     console.log("Velocidade: " + y_speed)
 
     // se ele estiver caindo
-    if (int_position_y < 490) {
+    if (checkCollision() == false) {
         if (y_speed > 0) {
             character.style.top = int_position_y + y_speed + "px"
         }
@@ -59,6 +59,7 @@ function gravity() {
         }
     } else {
         // velocidade igual a 0 se encostar no chão
+        console.log("BATEU")
         y_speed = 0
     }
 }
@@ -79,4 +80,19 @@ function aceleration() {
 function updatetelemetry() {
     let text = document.getElementById("data")
     text.textContent = "Speed: " + y_speed
+}
+
+function checkCollision() {
+    let character = document.getElementById("character")
+    let terrain = document.getElementById("terrain")
+
+    let characterRect = character.getBoundingClientRect()
+    let terrainRect = terrain.getBoundingClientRect()
+    
+    if (characterRect.bottom == terrainRect.top ) { // se a parte de baixo da nave encostar na parte de cima do terreno
+        console.log("bateu")
+        return true
+    } else {
+        return false // não bateu
+    }
 }
