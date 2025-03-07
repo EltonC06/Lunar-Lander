@@ -1,4 +1,5 @@
 let y_speed = 5
+generateTerrain()
 
 function control(direction) {
     let character = document.getElementById("character")
@@ -26,7 +27,7 @@ function control(direction) {
             break
         case "up":
             if (checkCollision() == false) {
-                character.style.top = int_position_y - speed + "px"
+                //character.style.top = int_position_y - speed + "px"
                 y_speed -= 1
             }
             break
@@ -34,7 +35,7 @@ function control(direction) {
 }
 
 setInterval(gravity, 150)
-//setInterval(aceleration, 1500)
+setInterval(aceleration, 1500)
 setInterval(updatetelemetry, 150)
 
 
@@ -44,8 +45,7 @@ function gravity() {
     
     let position_y = getComputedStyle(character).top
     let int_position_y = parseInt(position_y.replace("px", ""))
-    console.log("altitude: " + int_position_y)
-    console.log("Velocidade: " + y_speed)
+    //console.log("altitude: " + int_position_y)
 
     // se ele estiver caindo
     if (checkCollision() == false) {
@@ -59,7 +59,6 @@ function gravity() {
         }
     } else {
         // velocidade igual a 0 se encostar no chão
-        console.log("BATEU")
         y_speed = 0
     }
 }
@@ -74,6 +73,8 @@ function aceleration() {
     if (y_speed < 5 && int_position_y < 470 ) {
         y_speed += 1
         console.log("acelerando +1")
+    } else {
+        console.log("Não vou acelerar")
     }
 }
 
@@ -85,14 +86,36 @@ function updatetelemetry() {
 function checkCollision() {
     let character = document.getElementById("character")
     let terrain = document.getElementById("terrain")
-
-    let characterRect = character.getBoundingClientRect()
+    
+    let characterRect = character.getBoundingClientRect() // pega atributos do character
     let terrainRect = terrain.getBoundingClientRect()
     
     if (characterRect.bottom == terrainRect.top ) { // se a parte de baixo da nave encostar na parte de cima do terreno
-        console.log("bateu")
-        return true
+        console.log("BATEU")
+        return true   
     } else {
         return false // não bateu
     }
 }
+
+function generateTerrain() {
+    let terrain = document.getElementById("terrain")
+    // terreno será gerado de bloquinho em bloquinho
+    
+    for (let i = 0; i<25; i++) { // serão gerados 25 blocos distribuidos igualmente em cima do terreno
+        let bloco = document.createElement('div')
+        bloco.classList.add("terrenoGerado") // evitando Ids repetidos
+        bloco.style.width = '20px'
+        bloco.style.height = (20 + Math.random()*10) +'px'
+        bloco.style.backgroundColor = "gray"
+        
+        bloco.style.position = "absolute" // gerando em cima do terreno atual
+        
+        bloco.style.left = i*20 + "px" // espaçamento entre blocos
+        // gerar bloco acima de terreno
+        bloco.style.bottom = 50 + "px"
+        
+        terrain.appendChild(bloco)
+    }
+}
+
