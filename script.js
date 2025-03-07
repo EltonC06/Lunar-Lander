@@ -34,6 +34,7 @@ function control(direction) {
     }
 }
 
+setInterval(checkCollision, 10)
 setInterval(gravity, 150)
 setInterval(aceleration, 1500)
 setInterval(updatetelemetry, 150)
@@ -68,14 +69,11 @@ function aceleration() {
     let character = document.getElementById("character")
     let position_y = getComputedStyle(character).top
     let int_position_y = parseInt(position_y.replace("px", "")) 
-
-    // não pode acelerar quando tiver muito perto da superficie, pois aí vai ajudar o jogo a ficar mais jogável
-    if (y_speed < 5 && int_position_y < 470 ) {
+    
+    if (y_speed < 5) {
         y_speed += 1
-        console.log("acelerando +1")
-    } else {
-        console.log("Não vou acelerar")
     }
+    
 }
 
 function updatetelemetry() {
@@ -85,17 +83,26 @@ function updatetelemetry() {
 
 function checkCollision() {
     let character = document.getElementById("character")
-    let terrain = document.getElementById("terrain")
     
     let characterRect = character.getBoundingClientRect() // pega atributos do character
-    let terrainRect = terrain.getBoundingClientRect()
     
-    if (characterRect.bottom == terrainRect.top ) { // se a parte de baixo da nave encostar na parte de cima do terreno
-        console.log("BATEU")
-        return true   
-    } else {
-        return false // não bateu
+    const colecao = document.getElementsByClassName("block")
+    for (block of colecao) { 
+        let blockRect = block.getBoundingClientRect()
+
+        if (characterRect.left < blockRect.right && characterRect.right > blockRect.left) { // verifica o bloco que está em baixo do jogador
+            block.style.backgroundColor = "green"
+            if (characterRect.bottom > blockRect.top) { // se o jogador encostou no bloco que está em baixo dele
+                console.log("Landed")
+                return true
+            }
+        
+        } else {
+            block.style.backgroundColor = "gray"
+        }
     }
+    return false
+
 }
 
 function generateTerrain() {
@@ -104,7 +111,7 @@ function generateTerrain() {
     
     for (let i = 0; i<25; i++) { // serão gerados 25 blocos distribuidos igualmente em cima do terreno
         let bloco = document.createElement('div')
-        bloco.classList.add("terrenoGerado") // evitando Ids repetidos
+        bloco.classList.add("block") // evitando Ids repetidos
         bloco.style.width = '20px'
         bloco.style.height = (20 + Math.random()*10) +'px'
         bloco.style.backgroundColor = "gray"
