@@ -1,5 +1,12 @@
-let y_speed = 5
+
+let y_speed = 5.00
 generateTerrain()
+
+function startGame() {
+    let gravityInterval = setInterval(gravity, 150)
+    let acelerationInterval = setInterval(aceleration, 400)
+    let telemetryInterval = setInterval(updatetelemetry, 150)
+}
 
 function control(direction) {
     let character = document.getElementById("character")
@@ -27,17 +34,13 @@ function control(direction) {
             break
         case "up":
             if (checkCollision() == false) {
-                //character.style.top = int_position_y - speed + "px"
                 y_speed -= 1
             }
             break
     }
 }
 
-setInterval(checkCollision, 10)
-setInterval(gravity, 150)
-setInterval(aceleration, 1500)
-setInterval(updatetelemetry, 150)
+
 
 
 function gravity() {
@@ -54,8 +57,9 @@ function gravity() {
             character.style.top = int_position_y + y_speed + "px"
         }
         else { // se ele estiver subindo eu vou fazer um jeito dele perder a potencia e cair novamente
-            y_speed += 1
-
+            
+            y_speed += 0.25
+            
             character.style.top = int_position_y + y_speed + "px"
         }
     } else {
@@ -70,8 +74,8 @@ function aceleration() {
     let position_y = getComputedStyle(character).top
     let int_position_y = parseInt(position_y.replace("px", "")) 
     
-    if (y_speed < 5) {
-        y_speed += 1
+    if (y_speed < 5 && !checkCollision()) {
+        y_speed += 0.25
     }
     
 }
