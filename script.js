@@ -4,7 +4,7 @@ generateTerrain()
 
 function startGame() {
     let gravityInterval = setInterval(gravity, 150)
-    let acelerationInterval = setInterval(aceleration, 400)
+    let acelerationInterval = setInterval(aceleration, 40)
     let telemetryInterval = setInterval(updatetelemetry, 150)
 }
 
@@ -75,7 +75,7 @@ function aceleration() {
     let int_position_y = parseInt(position_y.replace("px", "")) 
     
     if (y_speed < 5 && !checkCollision()) {
-        y_speed += 0.25
+        y_speed += 0.05
     }
     
 }
