@@ -1,4 +1,3 @@
-
 let y_speed = 5.00
 generateTerrain()
 
@@ -7,6 +6,20 @@ function startGame() {
     let acelerationInterval = setInterval(aceleration, 40)
     let telemetryInterval = setInterval(updatetelemetry, 150)
 }
+
+document.addEventListener('keydown', event => {
+    console.log(event.code)
+    
+    if (event.code == "ArrowRight") {
+        control("right")
+    } else if (event.code == "ArrowLeft") {
+        control("left")
+    } else if (event.code == "ArrowUp") {
+        control("up")
+    } else if (event.code == "KeyP") {
+        startGame()
+    }
+})
 
 function control(direction) {
     let character = document.getElementById("character")
