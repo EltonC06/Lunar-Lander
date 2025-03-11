@@ -1,10 +1,14 @@
 let y_speed = 5.00
+let gameRunning = false
 generateTerrain()
 
 function startGame() {
-    let gravityInterval = setInterval(gravity, 150)
-    let acelerationInterval = setInterval(aceleration, 40)
-    let telemetryInterval = setInterval(updatetelemetry, 150)
+    if (!gameRunning) {
+        let gravityInterval = setInterval(gravity, 150)
+        let acelerationInterval = setInterval(aceleration, 40)
+        let telemetryInterval = setInterval(updatetelemetry, 150)
+        gameRunning = true
+    }
 }
 
 document.addEventListener('keydown', event => {
@@ -53,9 +57,6 @@ function control(direction) {
     }
 }
 
-
-
-
 function gravity() {
     // pegando o valor posicional Y do jogador para ir diminuindo e dar sensação de gravidade
     let character = document.getElementById("character")
@@ -77,6 +78,7 @@ function gravity() {
         }
     } else {
         // velocidade igual a 0 se encostar no chão
+        gameRunning = true
         y_speed = 0
     }
 }
@@ -142,4 +144,3 @@ function generateTerrain() {
         terrain.appendChild(bloco)
     }
 }
-
