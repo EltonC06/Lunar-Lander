@@ -2,6 +2,7 @@ let y_speed = 5.00
 let gameRunning = false
 let landed = false
 let gameStatus = "Running"
+let fuel = 100
 
 generateTerrain()
 
@@ -53,21 +54,33 @@ function control(direction) {
     let speed = 10
     switch (direction) {
         case "left":
-            if (checkCollision() == false) { // jogador não pode se mover uma vez tocado no chão
+            if (checkCollision() == false && isFueled() == true) { // jogador não pode se mover uma vez tocado no chão
                 character.style.left = int_position_x - speed + "px"
+                fuel -= 5
             }
             
             break
         case "right":
-            if (checkCollision() == false) { // jogador não pode se mover uma vez tocado no chão
+            if (checkCollision() == false && isFueled() == true) { // jogador não pode se mover uma vez tocado no chão
                 character.style.left = int_position_x + speed + "px"
+                fuel -= 5
             }
             break
         case "up":
-            if (checkCollision() == false) {
+            if (checkCollision() == false && isFueled() == true) {
                 y_speed -= 1
+                fuel -= 5
             }
             break
+    }
+}
+
+function isFueled() {
+    if (fuel > 0) {
+        return true
+    }
+    else {
+        return false
     }
 }
 
@@ -106,11 +119,11 @@ function gameOver(totalSpeed) {
         // perdeu
         gameStatus = "lose"
         console.log(gameStatus)
-        statusMessage.textContent = "Você perdeu"
+        statusMessage.textContent = "Status: Você perdeu"
     } else {
         // ganhou
         gameStatus = "win"
-        statusMessage.textContent = "Você ganhou"
+        statusMessage.textContent = "Status: Você ganhou"
     }
 }
 
@@ -131,6 +144,7 @@ function aceleration() {
 function updatetelemetry() {
     let text = document.getElementById("data")
     text.textContent = "Speed: " + y_speed
+    console.log("fuel: " + fuel + "%")
 }
 
 function checkCollision() {
