@@ -1,19 +1,33 @@
 let y_speed = 5.00
 let gameRunning = false
+let landed = false
+let gameStatus = "Running"
+
 generateTerrain()
 
-function startGame() {
-    if (!gameRunning) {
-        let gravityInterval = setInterval(gravity, 150)
+function startGame() {    
+    if (!gameRunning || landed) {
+        let gravityInterval = setInterval(gravity, 150) // vai ficar rodando, mas dentro de cada função, antes de começar o codigo, botei pra checar (gameRunning)
         let acelerationInterval = setInterval(aceleration, 40)
         let telemetryInterval = setInterval(updatetelemetry, 150)
         gameRunning = true
+        let statusMessage = document.getElementById("message-div")
+        statusMessage.textContent = "Status: Rodando"
+    } else {
+        console.log("Vou resetar")
+        resetGame()
     }
 }
 
-document.addEventListener('keydown', event => {
-    console.log(event.code)
-    
+function resetGame() {
+    console.log("Resetando")
+    let character = document.getElementById("character")
+    character.style.left = "50px"    
+    character.style.top = "50px"
+    gameRunning = true
+}
+
+document.addEventListener('keydown', event => {    
     if (event.code == "ArrowRight") {
         control("right")
     } else if (event.code == "ArrowLeft") {
@@ -58,41 +72,60 @@ function control(direction) {
 }
 
 function gravity() {
-    // pegando o valor posicional Y do jogador para ir diminuindo e dar sensação de gravidade
-    let character = document.getElementById("character")
-    
-    let position_y = getComputedStyle(character).top
-    let int_position_y = parseInt(position_y.replace("px", ""))
-    //console.log("altitude: " + int_position_y)
+    if (gameRunning) {
+                // pegando o valor posicional Y do jogador para ir diminuindo e dar sensação de gravidade
+        let character = document.getElementById("character")
+        
+        let position_y = getComputedStyle(character).top
+        let int_position_y = parseInt(position_y.replace("px", ""))
+        //console.log("altitude: " + int_position_y)
+        
+        // se ele estiver caindo
+        if (checkCollision() == false) {
+            if (y_speed > 0) {
+                character.style.top = int_position_y + y_speed + "px"
+            }
+            else { // se ele estiver subindo eu vou fazer um jeito dele perder a potencia e cair novamente
+                y_speed += 0.25
+                character.style.top = int_position_y + y_speed + "px"
+            }
+        } else {
+            // velocidade igual a 0 se encostar no chão
+            gameRunning = false
+            landed = true
+            gameOver(y_speed)
+            y_speed = 0
+        }
+    }
 
-    // se ele estiver caindo
-    if (checkCollision() == false) {
-        if (y_speed > 0) {
-            character.style.top = int_position_y + y_speed + "px"
-        }
-        else { // se ele estiver subindo eu vou fazer um jeito dele perder a potencia e cair novamente
-            
-            y_speed += 0.25
-            
-            character.style.top = int_position_y + y_speed + "px"
-        }
+}
+
+function gameOver(totalSpeed) {
+    let statusMessage = document.getElementById("message-div")
+    if (totalSpeed > 1.5) {
+        // perdeu
+        gameStatus = "lose"
+        console.log(gameStatus)
+        statusMessage.textContent = "Você perdeu"
     } else {
-        // velocidade igual a 0 se encostar no chão
-        gameRunning = true
-        y_speed = 0
+        // ganhou
+        gameStatus = "win"
+        statusMessage.textContent = "Você ganhou"
     }
 }
 
+
 // depois que o jogador sobe e começa a descer denovo, a sua velocidade acelera como se fosse na vida real
 function aceleration() {  
-    let character = document.getElementById("character")
-    let position_y = getComputedStyle(character).top
-    let int_position_y = parseInt(position_y.replace("px", "")) 
-    
-    if (y_speed < 5 && !checkCollision()) {
-        y_speed += 0.05
+    if (gameRunning) {
+        let character = document.getElementById("character")
+        let position_y = getComputedStyle(character).top
+        let int_position_y = parseInt(position_y.replace("px", "")) 
+        
+        if (y_speed < 5 && !checkCollision()) {
+            y_speed += 0.05
+        }
     }
-    
 }
 
 function updatetelemetry() {
@@ -108,11 +141,10 @@ function checkCollision() {
     const colecao = document.getElementsByClassName("block")
     for (block of colecao) { 
         let blockRect = block.getBoundingClientRect()
-
+        
         if (characterRect.left < blockRect.right && characterRect.right > blockRect.left) { // verifica o bloco que está em baixo do jogador
             block.style.backgroundColor = "green"
             if (characterRect.bottom > blockRect.top) { // se o jogador encostou no bloco que está em baixo dele
-                console.log("Landed")
                 return true
             }
         
