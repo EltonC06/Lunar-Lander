@@ -1,12 +1,29 @@
 body {
     font-family: Arial;
+    margin: 0px;
 }
 
-#game {
-    width: 500px;
-    height: 500px;
-    background-color: black;
+
+#container {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    bottom: 0;
+    background-color: rgb(130, 147, 132);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
+
+#game-screen {
+    background-color: rgb(0, 0, 0);
+    height: 500px;
+    width: 500px;
+}
+
+
+
 
 #terrain {
     position: relative;
@@ -14,10 +31,6 @@ body {
     background-color: gray;
     width: 100%;
     height: 50px;
-}
-
-#data {
-    color: rgb(4, 107, 30);
 }
 
 #character {
@@ -28,6 +41,51 @@ body {
     height: 10px;
     background-color: rgb(0, 0, 0);
     background-image: url(assets/lander.png);
+}
+
+#telemetry-panel {
+    background-color: gray;
+    height: 50px;
+    width: 500px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#speed-panel {
+    background-color: #002a16;
+    width: 119px;
+    height: 40px;
+    color: #9dfc51;
+    display: flex; /*é tudo um display*/
+    align-items: center;
+    justify-content: center;
+}
+
+#fuel-panel {
+    background-color: #002a16;
+    width: 100px;
+    height: 40px;
+    color: #9dfc51;
+    display: flex;
+    align-items: center;    
+    justify-content: center;
+}
+
+#status-panel {
+    background-color: #002a16;
+    width: 119px;
+    height: 40px;
+    color: #9dfc51;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/*
+#data {
+    color: rgb(4, 107, 30);
 }
 
 #telemetry-panel {
@@ -73,4 +131,4 @@ body {
 #telemetry-text-fuel {
     margin: 0px;
 }
-
+*/

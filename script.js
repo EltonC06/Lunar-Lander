@@ -142,15 +142,13 @@ function aceleration() {
 }
 
 function updatetelemetry() {
-    let textSpeed = document.getElementById("telemetry-text-speed")
-    let textFuel = document.getElementById("telemetry-text-fuel")
+    let textSpeed = document.getElementById("speed-panel")
+    let textFuel = document.getElementById("fuel-panel")
+    let textStatus = document.getElementById("status-panel")
+
     textSpeed.textContent = "Speed: " + y_speed.toFixed(2)
     textFuel.textContent = "Fuel: " + fuel + "%"
-
-
-    console.log("fuel: " + fuel + "%")
-    let status = document.getElementById("game-status")
-    status.textContent = "Status: " + gameStatus
+    textStatus.textContent = "Status: " + gameStatus
 
 }
 
