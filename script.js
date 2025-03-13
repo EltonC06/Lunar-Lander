@@ -135,16 +135,23 @@ function aceleration() {
         let position_y = getComputedStyle(character).top
         let int_position_y = parseInt(position_y.replace("px", "")) 
         
-        if (y_speed < 5 && !checkCollision()) {
+        if (y_speed < 10 && !checkCollision()) {
             y_speed += 0.05
         }
     }
 }
 
 function updatetelemetry() {
-    let text = document.getElementById("data")
-    text.textContent = "Speed: " + y_speed
+    let textSpeed = document.getElementById("telemetry-text-speed")
+    let textFuel = document.getElementById("telemetry-text-fuel")
+    textSpeed.textContent = "Speed: " + y_speed.toFixed(2)
+    textFuel.textContent = "Fuel: " + fuel + "%"
+
+
     console.log("fuel: " + fuel + "%")
+    let status = document.getElementById("game-status")
+    status.textContent = "Status: " + gameStatus
+
 }
 
 function checkCollision() {

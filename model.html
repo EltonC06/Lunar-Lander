@@ -8,40 +8,25 @@
 </head>
 
 <body>
-    <header id="header-main">
-        <h2>Welcome to Lunar Lander</h2>
-    </header>
-        
-    <div id="data">
-        Speed: null
-    </div>
-    <div id="message-div">
-        Status: Não rodando
-    </div>
-    
-    <div id="game">
+    <div id="screen"> 
+        <div id="telemetry-panel">
+            <div id="telemetry-screen" >
+                <p id="telemetry-text-speed">Speed: null</p>
+                <p id="telemetry-text-fuel">Fuel: 0%</p>
+            </div>
 
-        <div id="terrain"></div>
-        
-        <div id="character"></div>
+            <div id="status-screen">
+                <p id="game-status">Status: paused</p>
+            </div>
+
+        </div>
+        <div id="game">
+            <div id="terrain"></div>
+            
+            <div id="character"></div>
+        </div>
     </div>
-    
-    <div id="controls">
-        <button onclick="control('left')">esquerda</button>
-        <button onclick="control('up')">cima</button>
-        <button onclick="control('right')">direita</button>
-    </div>
-    
-    <div id="menu">
-        <input onclick="startGame()" type="button" value="Jogar">
-        <input type="button" value="Recordes">
-        <input type="button" value="Como jogar">
-    </div>
-    
-    
-    <footer id="footer-main">
-        <h1>Made by EltonC06</h1>
-    </footer>
+
     <script src="script.js"></script>
 </body>
 

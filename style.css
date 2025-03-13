@@ -2,14 +2,6 @@ body {
     font-family: Arial;
 }
 
-#header_main {
-    text-align: center;
-}
-
-#footer_main {
-    text-align: center;
-}
-
 #game {
     width: 500px;
     height: 500px;
@@ -35,13 +27,50 @@ body {
     width: 10px;
     height: 10px;
     background-color: rgb(0, 0, 0);
-    background-image: url(lander.png);
+    background-image: url(assets/lander.png);
 }
 
-#menu {
-    padding-top: 50px;
-    padding-bottom: 50px;
-    text-align: center;
+#telemetry-panel {
+    background-color: gray;
+    width: 500px;
+    height: 50px;
+    display: flex;
+    gap: 10px;
     align-items: center;
-    align-self: center;
 }
+
+#telemetry-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #002a16;
+    width: fit-content;
+    height: 42px;
+    color: #9dfc51;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 16px;
+}
+
+#status-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #002a16;
+    width: 120px;
+    height: 32px;
+    color: #9dfc51;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 0px;
+}
+
+#telemetry-text-speed {
+    margin: 0px;
+}
+
+#telemetry-text-fuel {
+    margin: 0px;
+}
+
