@@ -51,17 +51,17 @@ function control(direction) {
     let int_position_y = parseInt(position_y.replace("px", ""))
     
     // adicionando valor à posição atual do jogador para se mover
-    let speed = 10
+    let move_speed = 20
     switch (direction) {
         case "left":
             if (checkCollision() == false && isFueled() == true) { // jogador não pode se mover uma vez tocado no chão
-                character.style.left = int_position_x - speed + "px"
+                character.style.left = int_position_x - move_speed + "px"
                 fuel -= 2
             }
             break
         case "right":
             if (checkCollision() == false && isFueled() == true) { // jogador não pode se mover uma vez tocado no chão
-                character.style.left = int_position_x + speed + "px"
+                character.style.left = int_position_x + move_speed + "px"
                 fuel -= 2
             }
             break
@@ -178,16 +178,16 @@ function generateTerrain() {
     let terrain = document.getElementById("terrain")
     // terreno será gerado de bloquinho em bloquinho
     
-    for (let i = 0; i<25; i++) { // serão gerados 25 blocos distribuidos igualmente em cima do terreno
+    for (let i = 0; i<15; i++) { // serão gerados 25 blocos distribuidos igualmente em cima do terreno
         let bloco = document.createElement('div')
         bloco.classList.add("block") // evitando Ids repetidos
-        bloco.style.width = '20px'
+        bloco.style.width = '40px'
         bloco.style.height = (20 + Math.random()*10) +'px'
         bloco.style.backgroundColor = "gray"
         
         bloco.style.position = "absolute" // gerando em cima do terreno atual
         
-        bloco.style.left = i*20 + "px" // espaçamento entre blocos
+        bloco.style.left = i*40 + "px" // espaçamento entre blocos
         // gerar bloco acima de terreno
         bloco.style.bottom = 50 + "px"
         
