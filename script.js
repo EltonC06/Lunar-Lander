@@ -56,20 +56,19 @@ function control(direction) {
         case "left":
             if (checkCollision() == false && isFueled() == true) { // jogador não pode se mover uma vez tocado no chão
                 character.style.left = int_position_x - speed + "px"
-                fuel -= 5
+                fuel -= 2
             }
-            
             break
         case "right":
             if (checkCollision() == false && isFueled() == true) { // jogador não pode se mover uma vez tocado no chão
                 character.style.left = int_position_x + speed + "px"
-                fuel -= 5
+                fuel -= 2
             }
             break
         case "up":
             if (checkCollision() == false && isFueled() == true) {
                 y_speed -= 1
-                fuel -= 5
+                fuel -= 2
             }
             break
     }
@@ -145,7 +144,7 @@ function updatetelemetry() {
     let textSpeed = document.getElementById("speed-panel")
     let textFuel = document.getElementById("fuel-panel")
     let textStatus = document.getElementById("status-panel")
-
+    
     textSpeed.textContent = "Speed: " + y_speed.toFixed(2)
     textFuel.textContent = "Fuel: " + fuel + "%"
     textStatus.textContent = "Status: " + gameStatus
