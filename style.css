@@ -58,7 +58,7 @@ body {
     width: 119px;
     height: 40px;
     color: #9dfc51;
-    display: flex; /*é tudo um display*/
+    display: flex;
     align-items: center;
     justify-content: center;
 }
@@ -82,13 +82,13 @@ body {
     align-items: center;
     justify-content: center;
 }
-/*
+
 #menu {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    row-gap: 100px;
+    row-gap: 75px;
     columns: 1;
     flex-direction: column;
     color: aliceblue;
@@ -106,9 +106,9 @@ body {
     justify-content: center;
     font-size: 40px;
     width: 100%;
-    height: 10px;
+    height: fit-content;
 }
-*/
+
 /*
 #data {
     color: rgb(4, 107, 30);

@@ -12,11 +12,20 @@ function startGame() {
         let acelerationInterval = setInterval(aceleration, 40)
         let telemetryInterval = setInterval(updatetelemetry, 150)
         gameRunning = true
+        clearMenu()
     } else {
         console.log("Vou resetar")
         resetGame()
     }
 }
+
+function clearMenu() {
+    let menu = document.getElementById("menu")
+
+    menu.remove()
+}
+
+
 
 function resetGame() {
     console.log("Resetando")
