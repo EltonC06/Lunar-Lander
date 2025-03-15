@@ -7,26 +7,24 @@ let level = 1
 
 function startGame() {    
     if (level == 1) {
-        let gravityInterval = setInterval(gravity, 150) // vai ficar rodando, mas dentro de cada função, antes de começar o codigo, botei pra checar (gameRunning)
+        let gravityInterval = setInterval(gravity, 150)
         let acelerationInterval = setInterval(aceleration, 40)
         let telemetryInterval = setInterval(updatetelemetry, 150)
         gameRunning = true
-        clearMenu()
+        hideMenu(true)
         generateTerrain()
         generateLandingZone()
     }
-    else if (!gameRunning || landed) {
-        console.log("segundo if")
-        gameRunning = true
-    } else {
-        console.log("Vou resetar")
-        resetGame()
-    }
 }
 
-function clearMenu() {
+function hideMenu(boolean) {
     let menu = document.getElementById("menu")
-    menu.remove()
+
+    if (boolean == true)  {
+        menu.style.display = "none"
+    } else {
+        menu.style.display = "flex"
+    }
 }
 
 
@@ -37,8 +35,11 @@ function resetGame() {
     character.style.left = "40px"    
     character.style.top = "40px"
     fuel = 100
-    y_speed = 5
-    gameRunning = true
+    y_speed = 0
+    level = 1
+    gameStatus = "Paused"
+    resetTerrainGenerated()
+    gameRunning = false
 }
 
 document.addEventListener('keydown', event => {    
@@ -128,22 +129,33 @@ function gravity() {
             // velocidade igual a 0 se encostar no chão
             gameRunning = false
             landed = true
-            gameOver(y_speed, checkLandingSpot())
+            verifyGameOver(y_speed, checkLandingSpot())
             y_speed = 0
         }
     }
 }
 
-function gameOver(totalSpeed, landingZone) {
+function verifyGameOver(totalSpeed, landingZone) {
     if (totalSpeed > 1.5) {
         // perdeu
         gameStatus = "lose"
-        console.log(gameStatus)
+        showGameOverMessage(true)
+        setTimeout(() => {
+            hideMenu(false)
+            showGameOverMessage(false)
+            location.reload()
+        }, 2500);
     } else if (landingZone == "true" && totalSpeed < 1.5) {
         gameStatus = "win"
         nextLevel()
     } else {
         gameStatus = "lose"
+        showGameOverMessage(true)
+        setTimeout(() => {
+            hideMenu(false)
+            showGameOverMessage(false)
+            location.reload()
+        }, 2500);
     }
 }
 
@@ -277,12 +289,18 @@ function resetLandingZone() {
     }
 }
 
+function resetTerrainGenerated() {
+    console.log("Resetando terrenos gerados")
+    let terrain = document.getElementById("terrain")
+    terrain.innerText = ""
+
+}
+
 function checkLandingSpot() { // so vai checar apenas se tiver pousado com segurança
     let character = document.getElementById("character")
     let blockCollection = document.getElementsByClassName("block")
     let characterRect = character.getBoundingClientRect()
-    character.getAttribute
-    
+
     for (block of blockCollection) {
         blockRect = block.getBoundingClientRect()
         
@@ -313,4 +331,13 @@ function nextLevel() {
     }, 1000)
 
 
+}
+
+function showGameOverMessage(boolean) {
+    let gameOverMenu = document.getElementById("game-over-menu")
+    if (boolean == true) {
+        gameOverMenu.style.display = "flex"
+    } else {
+        gameOverMenu.style.display = "none"
+    }
 }
