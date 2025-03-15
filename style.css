@@ -82,7 +82,7 @@ body {
     align-items: center;
     justify-content: center;
 }
-/*
+
 #level-panel {
     background-color: #002a16;
     width: 79px;
@@ -92,7 +92,7 @@ body {
     align-items: center;
     justify-content: center;
 }
-*/
+
 #menu {
     position: relative;
     display: flex;

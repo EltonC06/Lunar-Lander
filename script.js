@@ -3,18 +3,21 @@ let gameRunning = false
 let landed = false
 let fuel = 100
 let gameStatus = "Running"
-
-generateTerrain()
-
+let level = 1
 
 function startGame() {    
-    if (!gameRunning || landed) {
+    if (level == 1) {
         let gravityInterval = setInterval(gravity, 150) // vai ficar rodando, mas dentro de cada função, antes de começar o codigo, botei pra checar (gameRunning)
         let acelerationInterval = setInterval(aceleration, 40)
         let telemetryInterval = setInterval(updatetelemetry, 150)
         gameRunning = true
         clearMenu()
+        generateTerrain()
         generateLandingZone()
+    }
+    else if (!gameRunning || landed) {
+        console.log("segundo if")
+        gameRunning = true
     } else {
         console.log("Vou resetar")
         resetGame()
@@ -23,7 +26,6 @@ function startGame() {
 
 function clearMenu() {
     let menu = document.getElementById("menu")
-
     menu.remove()
 }
 
@@ -32,8 +34,10 @@ function clearMenu() {
 function resetGame() {
     console.log("Resetando")
     let character = document.getElementById("character")
-    character.style.left = "50px"    
-    character.style.top = "50px"
+    character.style.left = "40px"    
+    character.style.top = "40px"
+    fuel = 100
+    y_speed = 5
     gameRunning = true
 }
 
@@ -136,10 +140,9 @@ function gameOver(totalSpeed, landingZone) {
         gameStatus = "lose"
         console.log(gameStatus)
     } else if (landingZone == "true" && totalSpeed < 1.5) {
-        // ganhou
         gameStatus = "win"
+        nextLevel()
     } else {
-        console.log("Perdeu")
         gameStatus = "lose"
     }
 }
@@ -162,10 +165,12 @@ function updatetelemetry() {
     let textSpeed = document.getElementById("speed-panel")
     let textFuel = document.getElementById("fuel-panel")
     let textStatus = document.getElementById("status-panel")
+    let textLevel = document.getElementById("level-panel")
     
     textSpeed.textContent = "Speed: " + y_speed.toFixed(2)
     textFuel.textContent = "Fuel: " + fuel + "%"
     textStatus.textContent = "Status: " + gameStatus
+    textLevel.textContent = "Level: " + level
 
 }
 
@@ -193,6 +198,7 @@ function checkCollision() {
 }
 
 function generateTerrain() {
+    console.log("Gerando terreno")
     let terrain = document.getElementById("terrain")
     // terreno será gerado de bloquinho em bloquinho
     
@@ -217,11 +223,16 @@ function generateTerrain() {
 }
 
 function generateLandingZone() {
+    console.log("Gerando zona de pouso")
     let terrain = document.getElementById("terrain")
 
     let blockCollection = document.getElementsByClassName("block")
     
-    let zoneQuantity = 5
+    let zoneQuantity = 7 - level
+    if (zoneQuantity < 1) {
+        zoneQuantity = 1
+    }
+
     let zoneGenerated = 0
     
     for (block of blockCollection) {
@@ -254,7 +265,16 @@ function generateLandingZone() {
             }
         }
     }, (200));
+}
 
+function resetLandingZone() {
+    console.log("Resetando zonas de pouso")
+    let blockCollection = document.getElementsByClassName("block")
+    for (block of blockCollection) {
+        console.log("Resetando zona")
+        block.setAttribute('landing-zone', 'false')
+
+    }
 }
 
 function checkLandingSpot() { // so vai checar apenas se tiver pousado com segurança
@@ -276,4 +296,21 @@ function checkLandingSpot() { // so vai checar apenas se tiver pousado com segur
             
         }
     }
+}
+
+function nextLevel() {
+    let character = document.getElementById("character")
+    level += 1
+    setTimeout(function() {
+        resetLandingZone()
+        character.style.top = "40px"
+        character.style.left = "40px"
+        y_speed = 5
+        fuel = 100
+        gameRunning = true
+        gameStatus = "Running"
+        generateLandingZone()
+    }, 1000)
+
+
 }
