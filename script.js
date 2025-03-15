@@ -6,6 +6,7 @@ let gameStatus = "Running"
 
 generateTerrain()
 
+
 function startGame() {    
     if (!gameRunning || landed) {
         let gravityInterval = setInterval(gravity, 150) // vai ficar rodando, mas dentro de cada função, antes de começar o codigo, botei pra checar (gameRunning)
@@ -13,6 +14,7 @@ function startGame() {
         let telemetryInterval = setInterval(updatetelemetry, 150)
         gameRunning = true
         clearMenu()
+        generateLandingZone()
     } else {
         console.log("Vou resetar")
         resetGame()
@@ -122,21 +124,23 @@ function gravity() {
             // velocidade igual a 0 se encostar no chão
             gameRunning = false
             landed = true
-            gameOver(y_speed)
+            gameOver(y_speed, checkLandingSpot())
             y_speed = 0
         }
     }
-
 }
 
-function gameOver(totalSpeed) {
+function gameOver(totalSpeed, landingZone) {
     if (totalSpeed > 1.5) {
         // perdeu
         gameStatus = "lose"
         console.log(gameStatus)
-    } else {
+    } else if (landingZone == "true" && totalSpeed < 1.5) {
         // ganhou
         gameStatus = "win"
+    } else {
+        console.log("Perdeu")
+        gameStatus = "lose"
     }
 }
 
@@ -175,13 +179,13 @@ function checkCollision() {
         let blockRect = block.getBoundingClientRect()
         
         if (characterRect.left < blockRect.right && characterRect.right > blockRect.left) { // verifica o bloco que está em baixo do jogador
-            block.style.backgroundColor = "green"
+            //block.style.backgroundColor = "red"
             if (characterRect.bottom > blockRect.top) { // se o jogador encostou no bloco que está em baixo dele
                 return true
             }
         
         } else {
-            block.style.backgroundColor = "gray"
+            //block.style.backgroundColor = "gray"
         }
     }
     return false
@@ -205,6 +209,71 @@ function generateTerrain() {
         // gerar bloco acima de terreno
         bloco.style.bottom = 50 + "px"
         
+        // criando atributo
+        bloco.setAttribute('landing-zone','false')
+        
         terrain.appendChild(bloco)
+    }
+}
+
+function generateLandingZone() {
+    let terrain = document.getElementById("terrain")
+
+    let blockCollection = document.getElementsByClassName("block")
+    
+    let zoneQuantity = 5
+    let zoneGenerated = 0
+    
+    for (block of blockCollection) {
+        if (zoneGenerated < zoneQuantity) {
+            if (Math.floor(Math.random() * 10) < 5) { // 50% de chance de gerar uma zona de pouso
+                block.style.backgroundColor = "white"
+                zoneGenerated += 1
+                block.setAttribute('landing-zone', 'true')
+            }
+        }
+    }
+    if (zoneGenerated < zoneQuantity) { // certificando que terá zonas geradas
+        if (zoneGenerated < zoneQuantity) {
+            if (Math.floor(Math.random() * 10) < 5) { // 50% de chance de gerar uma zona de pouso
+                block.style.backgroundColor = "white"
+                zoneGenerated += 1
+                block.setAttribute('landing-zone', 'true')
+            }
+        }
+    }
+    
+    let intervalCount = 0
+    let hideLandingZone = setInterval(function() { // após 1 segundo esconde as zonas de pouso
+        if (intervalCount < 5) {
+            intervalCount += 1
+        } else {
+            clearInterval(hideLandingZone)
+            for (block of blockCollection) {
+                block.style.backgroundColor = "gray"
+            }
+        }
+    }, (200));
+
+}
+
+function checkLandingSpot() { // so vai checar apenas se tiver pousado com segurança
+    let character = document.getElementById("character")
+    let blockCollection = document.getElementsByClassName("block")
+    let characterRect = character.getBoundingClientRect()
+    character.getAttribute
+    
+    for (block of blockCollection) {
+        blockRect = block.getBoundingClientRect()
+        
+        
+        if (characterRect.left < blockRect.right && characterRect.right > blockRect.left) { // bloco que ele está em cima
+            if (block.getAttribute("landing-zone") == "true") {
+                return "true"
+            } else {
+                return "false"
+            }
+            
+        }
     }
 }

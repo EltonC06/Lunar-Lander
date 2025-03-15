@@ -82,7 +82,17 @@ body {
     align-items: center;
     justify-content: center;
 }
-
+/*
+#level-panel {
+    background-color: #002a16;
+    width: 79px;
+    height: 40px;
+    color: #9dfc51;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+*/
 #menu {
     position: relative;
     display: flex;
