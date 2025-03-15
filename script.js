@@ -1,8 +1,8 @@
 let y_speed = 5.00
 let gameRunning = false
 let landed = false
-let gameStatus = "Running"
 let fuel = 100
+let gameStatus = "Running"
 
 generateTerrain()
 
@@ -12,8 +12,6 @@ function startGame() {
         let acelerationInterval = setInterval(aceleration, 40)
         let telemetryInterval = setInterval(updatetelemetry, 150)
         gameRunning = true
-        let statusMessage = document.getElementById("message-div")
-        statusMessage.textContent = "Status: Rodando"
     } else {
         console.log("Vou resetar")
         resetGame()
@@ -123,16 +121,13 @@ function gravity() {
 }
 
 function gameOver(totalSpeed) {
-    let statusMessage = document.getElementById("message-div")
     if (totalSpeed > 1.5) {
         // perdeu
         gameStatus = "lose"
         console.log(gameStatus)
-        statusMessage.textContent = "Status: Você perdeu"
     } else {
         // ganhou
         gameStatus = "win"
-        statusMessage.textContent = "Status: Você ganhou"
     }
 }
 

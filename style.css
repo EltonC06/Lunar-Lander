@@ -82,7 +82,33 @@ body {
     align-items: center;
     justify-content: center;
 }
+/*
+#menu {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    row-gap: 100px;
+    columns: 1;
+    flex-direction: column;
+    color: aliceblue;
+    font-size: 40px;
+    width: 100%;
+    height: fit-content;
 
+}
+
+#buttons {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    width: 100%;
+    height: 10px;
+}
+*/
 /*
 #data {
     color: rgb(4, 107, 30);
