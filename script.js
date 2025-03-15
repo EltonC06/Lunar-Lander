@@ -67,19 +67,19 @@ function control(direction) {
     let move_speed = 20
     switch (direction) {
         case "left":
-            if (checkCollision() == false && isFueled() == true) { // jogador não pode se mover uma vez tocado no chão
+            if (checkCollision() == false && isFueled() == true && gameRunning == true) { // jogador não pode se mover uma vez tocado no chão
                 character.style.left = int_position_x - move_speed + "px"
                 fuel -= 2
             }
             break
         case "right":
-            if (checkCollision() == false && isFueled() == true) { // jogador não pode se mover uma vez tocado no chão
+            if (checkCollision() == false && isFueled() == true && gameRunning == true) { // jogador não pode se mover uma vez tocado no chão
                 character.style.left = int_position_x + move_speed + "px"
                 fuel -= 2
             }
             break
         case "up":
-            if (checkCollision() == false && isFueled() == true) {
+            if (checkCollision() == false && isFueled() == true && gameRunning == true) {
                 y_speed -= 1
                 fuel -= 2
                 character.style.backgroundImage = "url('assets/lander_engine_on.png')"
