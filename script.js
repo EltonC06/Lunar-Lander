@@ -341,3 +341,15 @@ function showGameOverMessage(boolean) {
         gameOverMenu.style.display = "none"
     }
 }
+
+function showHowToPlay(boolean) {
+    let howToPlay = document.getElementById("container-how-to-play")
+    let menu = document.getElementById("menu")
+    if (boolean == true) {
+        menu.style.display = "none"
+        howToPlay.style.display = "flex"
+    } else {
+        howToPlay.style.display = "none"
+        menu.style.display = "flex"
+    }
+}

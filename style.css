@@ -136,3 +136,48 @@ body {
     width: fit-content;
     height: fit-content;
 }
+
+#container-how-to-play {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: fit-content;
+}
+
+#how-to-play-menu {
+    background-color: gainsboro;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 10px;
+    height: fit-content;
+    width: 290px;
+}
+
+#how-to-title {
+    background-color: gray;
+    width: 100%;
+    text-align: center;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 29px;
+}
+
+#game-context {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+}
+ 
+#controls-title {
+    text-align: center;
+    padding: 10px;
+    font-size: 28px;
+}
