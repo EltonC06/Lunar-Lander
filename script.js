@@ -193,7 +193,7 @@ function checkCollision() {
     let character = document.getElementById("character")
     
     let characterRect = character.getBoundingClientRect() // pega atributos do character
-    
+
     if (character.style.top.replace("px", "") <= -50) {
         return true
     }
@@ -257,7 +257,7 @@ function generateLandingZone() {
     for (block of blockCollection) {
         if (zoneGenerated < zoneQuantity) {
             if (Math.floor(Math.random() * 10) < 5) { // 50% de chance de gerar uma zona de pouso
-                block.style.backgroundColor = "white"
+                block.style.backgroundColor = "green"
                 zoneGenerated += 1
                 block.setAttribute('landing-zone', 'true')
             }
@@ -266,7 +266,7 @@ function generateLandingZone() {
     if (zoneGenerated < zoneQuantity) { // certificando que terá zonas geradas
         if (zoneGenerated < zoneQuantity) {
             if (Math.floor(Math.random() * 10) < 5) { // 50% de chance de gerar uma zona de pouso
-                block.style.backgroundColor = "white"
+                block.style.backgroundColor = "green"
                 zoneGenerated += 1
                 block.setAttribute('landing-zone', 'true')
             }
