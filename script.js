@@ -179,6 +179,12 @@ function updatetelemetry() {
     let textLevel = document.getElementById("level-panel")
     let textScore = document.getElementById("score-panel")
     
+    if (y_speed > 1.5) {
+        console.log("Velo > 1.5")
+        textSpeed.style.color = "Red"
+    } else {
+        textSpeed.style.color = "#9dfc51"
+    }
     textSpeed.textContent = "Speed: " + y_speed.toFixed(2)
     textFuel.textContent = "Fuel: " + fuel + "%"
     textStatus.textContent = "Status: " + gameStatus
