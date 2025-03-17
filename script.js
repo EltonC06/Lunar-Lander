@@ -50,8 +50,6 @@ document.addEventListener('keydown', event => {
         control("left")
     } else if (event.code == "ArrowUp") {
         control("up")
-    } else if (event.code == "KeyP") {
-        startGame()
     }
 })
 
