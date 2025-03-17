@@ -1,7 +1,7 @@
 let y_speed = 5.00
 let gameRunning = false
 let landed = false
-let fuel = 100
+let fuel = 1000
 let gameStatus = "Running"
 let level = 1
 let score = 0
@@ -69,13 +69,13 @@ function control(direction) {
     let move_speed = 20
     switch (direction) {
         case "left":
-            if (checkCollision() == false && isFueled() == true && gameRunning == true) { // jogador não pode se mover uma vez tocado no chão
+            if (checkCollision() == false && isFueled() == true && gameRunning == true && int_position_x != 0) { // jogador não pode se mover uma vez tocado no chão
                 character.style.left = int_position_x - move_speed + "px"
                 fuel -= 2
             }
             break
         case "right":
-            if (checkCollision() == false && isFueled() == true && gameRunning == true) { // jogador não pode se mover uma vez tocado no chão
+            if (checkCollision() == false && isFueled() == true && gameRunning == true && int_position_x != 580) { // jogador não pode se mover uma vez tocado no chão
                 character.style.left = int_position_x + move_speed + "px"
                 fuel -= 2
             }
@@ -130,14 +130,14 @@ function gravity() {
             // velocidade igual a 0 se encostar no chão
             gameRunning = false
             landed = true
-            verifyGameOver(y_speed, checkLandingSpot())
+            verifyGameOver(y_speed, checkLandingSpot(), character.style.top.replace("px", ""))
             y_speed = 0
         }
     }
 }
 
-function verifyGameOver(totalSpeed, landingZone) {
-    if (totalSpeed > 1.5) {
+function verifyGameOver(totalSpeed, landingZone, position_y) {
+    if (totalSpeed > 1.5 && position_y > 340) {
         // perdeu
         gameStatus = "lose"
         showGameOverMessage(true)
@@ -146,7 +146,7 @@ function verifyGameOver(totalSpeed, landingZone) {
             showGameOverMessage(false)
             location.reload()
         }, 2500);
-    } else if (landingZone == "true" && totalSpeed < 1.5) {
+    } else if (landingZone == "true" && totalSpeed < 1.5 && position_y > 340) {
         gameStatus = "win"
         nextLevel()
     } else {
@@ -194,6 +194,10 @@ function checkCollision() {
     
     let characterRect = character.getBoundingClientRect() // pega atributos do character
     
+    if (character.style.top.replace("px", "") <= -50) {
+        return true
+    }
+
     const colecao = document.getElementsByClassName("block")
     for (block of colecao) { 
         let blockRect = block.getBoundingClientRect()
