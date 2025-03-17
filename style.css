@@ -93,6 +93,17 @@ body {
     justify-content: center;
 }
 
+#score-panel {
+    background-color: #002a16;
+    width: 109px;
+    height: 40px;
+    color: #9dfc51;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
 #menu {
     position: relative;
     display: flex;

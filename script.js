@@ -4,6 +4,7 @@ let landed = false
 let fuel = 100
 let gameStatus = "Running"
 let level = 1
+let score = 0
 
 function startGame() {    
     if (level == 1) {
@@ -178,11 +179,13 @@ function updatetelemetry() {
     let textFuel = document.getElementById("fuel-panel")
     let textStatus = document.getElementById("status-panel")
     let textLevel = document.getElementById("level-panel")
+    let textScore = document.getElementById("score-panel")
     
     textSpeed.textContent = "Speed: " + y_speed.toFixed(2)
     textFuel.textContent = "Fuel: " + fuel + "%"
     textStatus.textContent = "Status: " + gameStatus
     textLevel.textContent = "Level: " + level
+    textScore.textContent = "Score: " + score
 
 }
 
@@ -319,6 +322,7 @@ function checkLandingSpot() { // so vai checar apenas se tiver pousado com segur
 function nextLevel() {
     let character = document.getElementById("character")
     level += 1
+    score += 100 + fuel
     setTimeout(function() {
         resetLandingZone()
         character.style.top = "40px"
