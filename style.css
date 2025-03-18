@@ -198,3 +198,13 @@ body {
     padding: 10px;
     font-size: 28px;
 }
+
+#out-of-fuel-message {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    color: red;
+    height: fit-content;
+    font-size: 40px;
+}

@@ -189,7 +189,6 @@ function updatetelemetry() {
     textStatus.textContent = "Status: " + gameStatus
     textLevel.textContent = "Level: " + level
     textScore.textContent = "Score: " + score
-
 }
 
 function checkCollision() {
@@ -364,3 +363,13 @@ function showHowToPlay(boolean) {
         menu.style.display = "flex"
     }
 }
+/*
+function showOutOfFuel(boolean) {
+    let outOfFuelMessage = document.getElementById("out-of-fuel-message")
+    if (boolean == true) {
+        outOfFuelMessage.style.display = "flex"
+    } else {
+        outOfFuelMessage.style.display = "none"
+    }
+}
+    */
