@@ -44,7 +44,7 @@ body {
     width: 20px;
     height: 20px;
     background-color: rgb(0, 0, 0);
-    background-image: url(assets/Lander_engine_off.png);
+    background-image: url(assets/landeroff.png);
 }
 
 #telemetry-panel {
