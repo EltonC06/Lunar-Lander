@@ -82,13 +82,13 @@ function control(direction) {
             if (checkCollision() == false && isFueled() == true && gameRunning == true) {
                 y_speed -= 1
                 fuel -= 2
-                character.style.backgroundImage = "url('assets/lander_engine_on.png')"
+                character.style.backgroundImage = "url('assets/Lander_engine_on.png')"
                 let timesRun = 0
                 var image_interval = setInterval(function() {
-                    character.style.backgroundImage = "url('assets/lander_engine_on.png')"
+                    character.style.backgroundImage = "url('assets/Lander_engine_on.png')"
                     timesRun += 1
                     if (timesRun == 9) {
-                        character.style.backgroundImage = "url('assets/lander_engine_off.png')"
+                        character.style.backgroundImage = "url('assets/Lander_engine_off.png')"
                         clearInterval(image_interval)
                     }
                 }, 100)
